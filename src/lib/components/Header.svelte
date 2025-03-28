@@ -1,22 +1,23 @@
-<header class="fixed top-0 right-0 left-0 lg:pl-64 bg-base-100 z-10 shadow-md">
+<script lang="ts">
+  import { sidebarOpen } from '$lib/stores/sidebarStore';
+	import { Search } from 'lucide-svelte';
+</script>
+
+<header class="transition-all duration-200 ease-in fixed top-0 right-0 left-0 {$sidebarOpen ? 'pl-0 lg:pl-64' : 'pl-0 lg:pl-24'} bg-base-100 z-10 shadow-md">
   <div class="navbar px-4">
     
     <div class="navbar-start ">
       <!-- Mobile menu button -->
-      <button id="mobile-menu-button" class="btn btn-ghost lg:hidden">
+      <!-- <button id="mobile-menu-button" class="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
-      </button>
+      </button> -->
       <!-- Search -->
       <div class="form-control">
         <div class="input-group">
-          <input type="text" placeholder="Search..." class="input input-bordered w-full max-w-xs" />
-          <button class="btn btn-square">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
+          <Search class="absolute top-1/2 ml-2 transform -translate-y-1/2 z-10" />
+          <input type="text" placeholder="Search..." class="input input-bordered w-full max-w-xs pl-10" />          
         </div>
       </div>
     </div>

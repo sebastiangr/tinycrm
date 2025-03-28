@@ -1,9 +1,10 @@
 <script lang="ts">
   // import { Calendar, ChevronLeft, FolderOpen, ListTodo, Moon, Sun, UserRoundSearch, UsersRound } from "lucide-svelte";
   import { Calendar, ChevronLeft, FolderOpen, ListTodo, Moon, Sun, UserRoundSearch, UsersRound  as IconType, Home, Library, Cog, UsersRound, ChevronRight } from "lucide-svelte";
+  import { sidebarOpen } from '$lib/stores/sidebarStore';
 
   let isDarkMode = $state(false);
-  let isSidebarOpen = $state(true); // Local state
+  // let isSidebarOpen = $state(true); // Local state
 
   type MenuItem = {
     name: string;
@@ -57,9 +58,14 @@
     const theme = isDarkMode ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", theme);
   }
+  
+  // function toggleSidebar() {
+  //   isSidebarOpen = !isSidebarOpen;
+  //   // dispatch('stateChange', isSidebarOpen); // Emit state change event
+  // }
+
   function toggleSidebar() {
-    isSidebarOpen = !isSidebarOpen;
-    // dispatch('stateChange', isSidebarOpen); // Emit state change event
+    sidebarOpen.update(current => !current);
   }
 
 
@@ -67,17 +73,17 @@
 <!-- Sidebar -->
 <aside
   id="sidebar"
-  class="sidebar fixed flex flex-col justify-between top-0 left-0 h-full bg-base-200 shadow-lg z-30 transition-[width] duration-200 ease-in {isSidebarOpen ? 'w-[16rem]' : 'w-[54px]'}">
+  class="sidebar fixed flex flex-col justify-between top-0 left-0 h-full bg-base-200 shadow-lg z-30 transition-[width] duration-200 ease-in {$sidebarOpen ? 'w-[16rem]' : 'w-[54px]'}">
 <!-- style="width: {isSidebarOpen ? '16rem' : '54px'}" -->
   <!-- Sidebar Header with Logo and Toggle -->
   <div class="p-2 pt-4 pb-4 flex items-center justify-between border-b border-base-300">
     <div class="flex items-center">
       <div class="w-8 h-8 bg-primary rounded-md flex items-center justify-center text-primary-content font-bold text-xl">D</div>
-      <span class="ml-2 text-lg font-semibold menu-label" class:hidden={!isSidebarOpen}>Dashboard</span>
+      <span class="ml-2 text-lg font-semibold menu-label" class:hidden={!$sidebarOpen}>Dashboard</span>
     </div>
-    <button id="sidebar-toggle" class="btn btn-square lg:flex hidden {isSidebarOpen ? 'ml-0' : 'ml-6'}" onclick={toggleSidebar}>
+    <button id="sidebar-toggle" class="btn btn-square lg:flex hidden {$sidebarOpen ? 'ml-0' : 'ml-6'}" onclick={toggleSidebar}>
 
-      {#if isSidebarOpen}
+      {#if $sidebarOpen}
         <ChevronLeft size="24" />
       {:else}
         <ChevronRight size="24" />
@@ -91,9 +97,9 @@
     {#each menuItems as item}
       {@const Icon = item.icon}
       <li class="mb-2">
-        <a href={item.href} class="{isSidebarOpen ? '' : 'tooltip hover:scale-110'} tooltip-right flex items-center p-2 transition duration-200 ease-in-out " data-tip={item.name}>
+        <a href={item.href} class="{$sidebarOpen ? '' : 'tooltip hover:scale-110'} tooltip-right flex items-center p-2 transition duration-200 ease-in-out " data-tip={item.name}>
           <Icon size="22"/>
-          <span class:hidden={!isSidebarOpen}>{item.name}</span>
+          <span class:hidden={!$sidebarOpen}>{item.name}</span>
         </a>
       </li>
     {/each}
