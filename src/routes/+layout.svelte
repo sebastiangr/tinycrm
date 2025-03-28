@@ -15,7 +15,7 @@
 
 <Sidebar />
 
-<div id="content-area" class="transition-all duration-200 ease-in pt-16 {$sidebarOpen ? 'ml-0 lg:ml-64' : 'ml-0 lg:ml-14'}">
+<div id="content-area" class="transition-all duration-200 ease-in pt-16 {$sidebarOpen ? 'ml-0 lg:ml-56' : 'ml-0 lg:ml-14'}">
   <Header />
   
   <div class="p-6">
