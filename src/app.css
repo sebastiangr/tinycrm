@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+/* Plugins */
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+/* @plugin "daisyui"; */
+
+
+@plugin "daisyui" {
+  themes: nord --default, dim --prefersdark;
+}
+@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
+
+/* Class based dark mode */
+/* @custom-variant dark (&:where(.dark, .dark *)); */
+/* @custom-variant dark (&:where([data-theme=night], [data-theme=night] *)); */
+
