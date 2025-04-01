@@ -51,7 +51,7 @@
 <div class="mx-auto">
   <h1 class="text-3xl font-bold mb-8">Settings</h1>
   
-  <div class="card bg-base-200 shadow-xl">
+  <div class="card bg-base-200">
     <div class="card-body">
       <!-- Menu Position Section -->
       <section class="mb-8">
