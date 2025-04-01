@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { menuItems } from '$lib/stores/menuStore';
   import { sidebarOpen } from '$lib/stores/sidebarStore';
 	import { Menu, Search, Settings, UserRound, X } from 'lucide-svelte';
 	import { fade, fly } from 'svelte/transition';
@@ -36,16 +37,6 @@
     
     <div class="md:pl-6 flex flex-row">
       <!-- Mobile menu button -->
-      <!-- <button id="mobile-menu-button" class="btn btn-ghost md:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-        </svg>
-      </button> -->
-
-      <!-- <a href="/" id="mobile-menu-button" class="flex md:hidden btn btn-ghost btn-circle mr-4">        
-        <Menu />        
-      </a>       -->
-      <!-- Mobile menu button -->
       <button id="mobile-menu-button" class="flex md:hidden btn btn-ghost btn-circle mr-4" onclick={toggleMobileMenu}>        
         <Menu />
       </button>        
@@ -82,7 +73,6 @@
   </div>
 </header>
 
-
 <!-- Mobile Menu Drawer -->
 {#if mobileMenuOpen}
   <!-- Overlay -->
@@ -96,10 +86,8 @@
   ></button>
   
   <!-- Drawer -->
-  <div 
-    class="fixed top-0 left-0 h-full w-64 bg-base-200 z-30 md:hidden overflow-y-auto"
-    transition:fly={{ x: -300, duration: 300 }}
-  >
+  <div class="fixed top-0 left-0 h-full w-64 bg-base-200 z-30 md:hidden overflow-y-auto"
+    transition:fly={{ x: -300, duration: 300 }} >
     <div class="p-4">
       <!-- Close button -->
       <button class="btn btn-ghost btn-circle absolute top-4 right-4" onclick={closeMobileMenu}>
@@ -112,44 +100,19 @@
       </div>
       
       <!-- Navigation items - same as sidebar -->
-      <ul class="menu menu-md p-0">
-        <li>
-          <a href="/" class="flex items-center p-3 rounded-lg" onclick={closeMobileMenu}>
-            <span class="material-icons">dashboard</span>
-            <span class="ml-3">Dashboard</span>
-          </a>
-        </li>
-        <li>
-          <a href="/contacts" class="flex items-center p-3 rounded-lg" onclick={closeMobileMenu}>
-            <span class="material-icons">contacts</span>
-            <span class="ml-3">Contacts</span>
-          </a>
-        </li>
-        <li>
-          <a href="/companies" class="flex items-center p-3 rounded-lg" onclick={closeMobileMenu}>
-            <span class="material-icons">business</span>
-            <span class="ml-3">Companies</span>
-          </a>
-        </li>
-        <li>
-          <a href="/deals" class="flex items-center p-3 rounded-lg" onclick={closeMobileMenu}>
-            <span class="material-icons">handshake</span>
-            <span class="ml-3">Deals</span>
-          </a>
-        </li>
-        <li>
-          <a href="/tasks" class="flex items-center p-3 rounded-lg" onclick={closeMobileMenu}>
-            <span class="material-icons">task</span>
-            <span class="ml-3">Tasks</span>
-          </a>
-        </li>
-        <li>
-          <a href="/reports" class="flex items-center p-3 rounded-lg" onclick={closeMobileMenu}>
-            <span class="material-icons">bar_chart</span>
-            <span class="ml-3">Reports</span>
-          </a>
-        </li>
+      <ul class="menu menu-md p-0 w-full">
+        {#each $menuItems as item}
+          {@const Icon = item.icon}
+          <li class="{item.enabled ? 'flex' : 'hidden'}">
+            <a href={item.href} class="group flex items-center p-2 transition duration-200 ease-in-out" onclick={closeMobileMenu}>
+              <!-- <Icon size="22" class="mr-2 group-hover:scale-110"/> -->
+              <Icon size="22"/>
+              <span>{item.name}</span>
+            </a>
+          </li>
+        {/each}
       </ul>
+
     </div>
   </div>
 {/if}

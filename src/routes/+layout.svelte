@@ -18,7 +18,7 @@
 <div id="content-area" class="transition-all duration-200 ease-in pt-16 {$sidebarOpen ? 'ml-0 md:ml-56' : 'ml-0 md:ml-14'}">
   <Header />
   
-  <div class="p-6">
+  <div class="p-8">
     {@render children()}
   </div>
 </div>

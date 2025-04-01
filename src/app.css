@@ -8,6 +8,7 @@
 
 @plugin "daisyui" {
   themes: nord --default, dim --prefersdark;
+  exclude: rootscrollgutter;
 }
 @custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
 @plugin "daisyui/theme" {
@@ -54,13 +55,16 @@
   --noise: 0;
 }
 
-/* Class based dark mode */
-/* @custom-variant dark (&:where(.dark, .dark *)); */
+/* Class based dark mode  */
+/* @custom-variant dark (&:where(.dark, .dark *));  */
 /* @custom-variant dark (&:where([data-theme=night], [data-theme=night] *)); */
 
+
+/* TODO: Cambiar modo de muestra de menú activo, que el selector CSS no sea tan general -debe ser específico para el menú- */
 a.active {
   /* color: --color-info; */
-  color: var(--color-info);
+  color: white;
+  background-color: var(--color-primary);
 }
 
 .input {

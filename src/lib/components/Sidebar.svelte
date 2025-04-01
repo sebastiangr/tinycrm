@@ -3,50 +3,12 @@
   import { Calendar, ChevronLeft, FolderOpen, ListTodo, Moon, Sun, UserRoundSearch, UsersRound  as IconType, Home, Library, Cog, UsersRound, ChevronRight } from "lucide-svelte";
   import { sidebarOpen, sidebarMenuPosition } from '$lib/stores/sidebarStore';
 	import { afterNavigate } from "$app/navigation";
+	import { menuItems } from "$lib/stores/menuStore";
 
   let isDarkMode = $state(false);
   // let isSidebarOpen = $state(true); // Local state
   let path = "";
   let currentRoute = $state(); 
-
-  type MenuItem = {
-    name: string;
-    href: string;
-    icon: typeof IconType;
-  };
-
-  const menuItems: MenuItem[] = [
-    {
-      name: 'Home',
-      href: '/',
-      icon: Home
-    },
-    {
-      name: 'Contactos',
-      href: '/contactos',
-      icon: UsersRound
-    },
-    {
-      name: 'Leads',
-      href: '/leads',
-      icon: UserRoundSearch
-    },
-    {
-      name: 'Proyectos',
-      href: '/proyectos',
-      icon: FolderOpen
-    },
-    {
-      name: 'Tareas',
-      href: '/tareas',
-      icon: ListTodo
-    },
-    {
-      name: 'Calendario',
-      href: '/calendario',
-      icon: Calendar
-    }
-  ];
 
   // Toggle theme and save preference to localStorage
   function toggleTheme() {
@@ -87,8 +49,8 @@
   <!-- Sidebar Header with Logo and Toggle -->
   <div class="p-2 pt-4 pb-4 flex items-center justify-between">
     <div class="flex items-center">
-      <div class="w-[38px] h-[38px] bg-primary rounded-md flex items-center justify-center text-primary-content font-bold text-xl">D</div>
-      <span class="ml-2 text-lg font-semibold menu-label" class:hidden={!$sidebarOpen}>Dashboard</span>
+      <div class="w-[38px] h-[38px] bg-primary rounded-md flex items-center justify-center text-primary-content font-bold text-xl">T</div>
+      <span class="ml-2 text-lg font-semibold menu-label" class:hidden={!$sidebarOpen}>TinyCRM</span>
     </div>
     <button id="sidebar-toggle" class="btn btn-circle md:flex hidden {$sidebarOpen ? 'ml-0' : 'ml-6'}" onclick={toggleSidebar}>
 
@@ -103,9 +65,9 @@
   <!-- Sidebar Menu -->
   <ul class="menu p-2 w-full">
 
-    {#each menuItems as item}
+    {#each $menuItems as item}
       {@const Icon = item.icon}
-      <li class="mb-2">
+      <li class="mb-2 {item.enabled ? 'flex' : 'hidden'}">
         <a href={item.href} class="{$sidebarOpen ? '' : 'tooltip'} tooltip-right group flex items-center p-2 transition duration-200 ease-in-out {(currentRoute === item.href) ? 'active' : ''}" data-tip={item.name}>          
           <!-- <Icon size="22" class="mr-2 group-hover:scale-110"/> -->
           <Icon size="22"/>
