@@ -32,9 +32,9 @@
 
   // Use $effect for side effects in Svelte 5
   $effect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    isDarkMode = savedTheme === "dark";
-    document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
+    // const savedTheme = localStorage.getItem("theme");
+    // isDarkMode = savedTheme === "dark";
+    // document.documentElement.setAttribute("data-theme", isDarkMode ? "dark" : "light");
     // console.log("Current route", currentRoute);
   });
 
@@ -83,7 +83,7 @@
     <div class="flex">
       
       <label class="swap swap-rotate">
-        <input type="checkbox" class="theme-controller hidden" value="nord" />      
+        <input type="checkbox" class="theme-controller hidden" value="emerald" />      
         <Sun class="swap-off" size="22"/> 
         <Moon class="swap-on" size="22"/>
       </label>

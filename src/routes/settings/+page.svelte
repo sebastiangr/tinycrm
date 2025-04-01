@@ -53,7 +53,7 @@
   
   <div class="card bg-base-200">
     <div class="card-body">
-      <!-- Menu Position Section -->
+      <!-- Menu Position Section -->º
       <section class="mb-8">
         <h2 class="text-xl font-semibold mb-4">Posición del menú</h2>
         <div class="form-control flex flex-row gap-4">

@@ -7,17 +7,20 @@
 
 
 @plugin "daisyui" {
-  themes: nord --default, dim --prefersdark;
+  themes: emerald --default, business --prefersdark;
   exclude: rootscrollgutter;
 }
-@custom-variant dark (&:where([data-theme=night], [data-theme=night] *));
-@plugin "daisyui/theme" {
-  name: "tinycrm";
-  default: true; /* set as default */
-  prefersdark: false; /* set as default dark mode (prefers-color-scheme:dark) */
-  color-scheme: light; /* color of browser-provided UI */
+/* @custom-variant corporate (&:where([data-theme=night], [data-theme=night] *)); */
+/* @plugin "daisyui/theme" { */
+  /* name: "tinycrm"; */
+  /* default: true;  */
+  /* set as default */
+  /* prefersdark: false;  */
+  /* set as default dark mode (prefers-color-scheme:dark) */
+  /* color-scheme: light;  */
+  /* color of browser-provided UI */
 
-  --color-base-100: oklch(98% 0.02 240);
+  /* --color-base-100: oklch(98% 0.02 240);
   --color-base-200: oklch(95% 0.03 240);
   --color-base-300: oklch(92% 0.04 240);
   --color-base-content: oklch(20% 0.05 240);
@@ -36,24 +39,24 @@
   --color-warning: oklch(80% 0.25 80);
   --color-warning-content: oklch(20% 0.05 80);
   --color-error: oklch(65% 0.3 30);
-  --color-error-content: oklch(98% 0.01 30);
+  --color-error-content: oklch(98% 0.01 30); */
 
   /* border radius */
-  --radius-selector: 1rem;
+  /* --radius-selector: 1rem;
   --radius-field: 0.25rem;
-  --radius-box: 0.5rem;
+  --radius-box: 0.5rem; */
 
   /* base sizes */
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
+  /* --size-selector: 0.25rem;
+  --size-field: 0.25rem; */
 
   /* border size */
-  --border: 1px;
+  /* --border: 1px; */
 
   /* effects */
-  --depth: 1;
+  /* --depth: 1;
   --noise: 0;
-}
+} */
 
 /* Class based dark mode  */
 /* @custom-variant dark (&:where(.dark, .dark *));  */
