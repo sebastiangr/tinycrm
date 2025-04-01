@@ -1,7 +1,7 @@
 <script lang="ts">
   // import { Calendar, ChevronLeft, FolderOpen, ListTodo, Moon, Sun, UserRoundSearch, UsersRound } from "lucide-svelte";
   import { Calendar, ChevronLeft, FolderOpen, ListTodo, Moon, Sun, UserRoundSearch, UsersRound  as IconType, Home, Library, Cog, UsersRound, ChevronRight } from "lucide-svelte";
-  import { sidebarOpen } from '$lib/stores/sidebarStore';
+  import { sidebarOpen, sidebarMenuPosition } from '$lib/stores/sidebarStore';
 	import { afterNavigate } from "$app/navigation";
 
   let isDarkMode = $state(false);
@@ -80,7 +80,9 @@
 <!-- Sidebar -->
 <aside
   id="sidebar"
-  class="sidebar fixed flex flex-col justify-between top-0 left-0 h-full bg-base-200 z-30 transition-[width] duration-200 w-ease-in {$sidebarOpen ? 'w-[14rem]' : 'w-[54px]'}">
+  class="sidebar fixed hidden md:flex flex-col top-0 left-0 h-full bg-base-200 z-30 transition-[width] duration-200 w-ease-in 
+  {$sidebarMenuPosition}
+  {$sidebarOpen ? 'w-[14rem]' : 'w-[54px]'}">
 <!-- style="width: {isSidebarOpen ? '16rem' : '54px'}" -->
   <!-- Sidebar Header with Logo and Toggle -->
   <div class="p-2 pt-4 pb-4 flex items-center justify-between">
@@ -88,7 +90,7 @@
       <div class="w-[38px] h-[38px] bg-primary rounded-md flex items-center justify-center text-primary-content font-bold text-xl">D</div>
       <span class="ml-2 text-lg font-semibold menu-label" class:hidden={!$sidebarOpen}>Dashboard</span>
     </div>
-    <button id="sidebar-toggle" class="btn btn-square lg:flex hidden {$sidebarOpen ? 'ml-0' : 'ml-6'}" onclick={toggleSidebar}>
+    <button id="sidebar-toggle" class="btn btn-circle md:flex hidden {$sidebarOpen ? 'ml-0' : 'ml-6'}" onclick={toggleSidebar}>
 
       {#if $sidebarOpen}
         <ChevronLeft size="24" />
@@ -131,8 +133,6 @@
 </aside>
 
 <style>
-  a.active {
-    color: red;
-  }
+  /* TODO: Change color */
 
 </style>
