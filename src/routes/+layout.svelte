@@ -5,12 +5,7 @@
 	import '../app.css';
 
 	let { children } = $props();
-	// let isSidebarOpen = $state(true); // Track sidebar state
 
-	// // Update `isSidebarOpen` when Sidebar changes
-	// function handleSidebarStateChange(event: CustomEvent<boolean>) {
-	// 	isSidebarOpen = event.detail;
-	// }
 </script>
 
 <Sidebar />
