@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { menuItems } from '$lib/stores/menuStore';
-  import { sidebarMenuPosition } from '$lib/stores/sidebarStore';
+  import { sidebarMenuPosition, sidebarType } from '$lib/stores/sidebarStore';
 	import { writable } from 'svelte/store';
   // let menuPosition: 'top' | 'middle' = 'top';
 
@@ -40,9 +40,14 @@
     // For now, we'll just log the changes
     console.log('Menu items to save:', menuItems);
     console.log('Sidebar position to save:', $sidebarMenuPosition);
+    console.log('Sidebar type to save:', $sidebarType);
     
     // In a real implementation, you would update the actual stores
     // menuItems.set($editableMenuItems);
+  }
+
+  function setSidebarType(value: boolean) {
+    sidebarType.set(value);
   }
 
 </script>
@@ -53,30 +58,70 @@
   
   <div class="card bg-base-200">
     <div class="card-body">
-      <!-- Menu Position Section -->º
+
+      <!-- Menu Position Section -->
       <section class="mb-8">
         <h2 class="text-xl font-semibold mb-4">Posición del menú</h2>
-        <div class="form-control flex flex-row gap-4">
-          <input 
-            id="radio-top" 
-            type="radio" 
-            name="menu-position" 
-            class="radio radio-primary" 
-            checked={$sidebarMenuPosition === 'justify-start'} 
-            onchange={() => sidebarMenuPosition.set('justify-start')} 
-          />
-          <label class="label" for="radio-top">At the top</label>
-          <input 
-            id="radio-center" 
-            type="radio" 
-            name="menu-position" 
-            class="radio radio-primary" 
-            checked={$sidebarMenuPosition === 'justify-between'} 
-            onchange={() => sidebarMenuPosition.set('justify-between')} 
-          />
-          <label class="label" for="radio-center">At the center</label>          
+        <div class="form-control flex flex-col gap-4">
+
+          <div class="flex items-center gap-4">
+            <input 
+              id="radio-top" 
+              type="radio" 
+              name="menu-position" 
+              class="radio radio-primary" 
+              checked={$sidebarMenuPosition === 'justify-start'} 
+              onchange={() => sidebarMenuPosition.set('justify-start')} 
+            />
+            <label class="label" for="radio-top">At the top</label>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <input 
+              id="radio-center" 
+              type="radio" 
+              name="menu-position" 
+              class="radio radio-primary" 
+              checked={$sidebarMenuPosition === 'justify-between'} 
+              onchange={() => sidebarMenuPosition.set('justify-between')} 
+            />
+            <label class="label" for="radio-center">At the center</label>          
+          </div>
+
         </div>
       </section>
+
+      <!-- Menu Type Section -->
+      <section class="mb-8">
+        <h2 class="text-xl font-semibold mb-4">Selección tipo de menú</h2>
+        <div class="form-control flex flex-col gap-4">
+
+          <div class="flex items-center gap-4">
+            <input 
+              id="radio-fixed" 
+              type="radio" 
+              name="menu-type" 
+              class="radio radio-primary" 
+              checked={$sidebarType === true} 
+              onchange={() => setSidebarType(true)} 
+            />
+            <label class="label" for="radio-fixed">Menú fijo</label>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <input 
+              id="radio-floating" 
+              type="radio" 
+              name="menu-type" 
+              class="radio radio-primary" 
+              checked={$sidebarType === false} 
+              onchange={() => setSidebarType(false)} 
+            />
+            <label class="label" for="radio-floating">Menú flotante</label>    
+          </div>      
+
+        </div>
+      </section>       
       
       <!-- Menu Items Section -->
       <section class="mb-8">
@@ -151,7 +196,8 @@
   <!-- Save Button -->
   <div class="mt-6 flex justify-end">
     <!-- <button class="btn btn-primary" on:click={saveSettings}> -->
-    <button class="btn btn-primary" >
+    <!-- <button class="btn btn-primary" > -->
+    <button class="btn btn-primary" onclick={saveSettings}>
       Save Settings
     </button>
   </div>

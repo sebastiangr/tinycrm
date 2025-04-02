@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { menuItems } from '$lib/stores/menuStore';
-  import { sidebarOpen } from '$lib/stores/sidebarStore';
+  import { sidebarOpen, sidebarType } from '$lib/stores/sidebarStore';
 	import { Menu, Search, Settings, UserRound, X } from 'lucide-svelte';
 	import { fade, fly } from 'svelte/transition';
   
@@ -31,21 +31,24 @@
   })
   
 </script>
-
-<header class="bg-base-200 transition-[padding] duration-200 ease-in fixed top-0 right-0 left-0 {$sidebarOpen ? 'pl-4 md:pl-56' : 'pl-4 md:pl-24'} bg-base-100 z-10 pt-4 pb-4">
+<!-- bg-base-200 -->
+<header class="transition-[padding] duration-200 ease-in fixed top-0 right-0 left-0 
+{$sidebarOpen ? 'pl-4 md:pl-56' : 'pl-4 md:pl-24'} 
+{$sidebarType ? '' : 'pt-8 ml-4'}
+bg-base-100 z-10 pt-4 pb-4">
   <div class="flex flex-row justify-between p-0 h-auto">
     
-    <div class="md:pl-6 flex flex-row">
+    <div class="md:pl-6 flex flex-row w-full pr-4">
       <!-- Mobile menu button -->
       <button id="mobile-menu-button" class="flex md:hidden btn btn-ghost btn-circle mr-4" onclick={toggleMobileMenu}>        
         <Menu />
       </button>        
-      <!-- Search -->
-      <div class="form-control">
-        <div class="input-group w-full max-w-lg ">
-          <Search class="absolute top-1/2 ml-2 transform -translate-y-1/2 z-10" />
-          <input type="text" placeholder="Buscar..." class="input input-bordered pl-10" />          
+
+      <div class="relative w-full">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none z-10">
+          <Search class="h-5 w-5" />
         </div>
+        <input type="search" class="input input-bordered pl-10 w-full md:w-96" placeholder="Buscar..." />
       </div>
     </div>
   
@@ -56,9 +59,8 @@
       </a>
 
       <div class="dropdown dropdown-end">
-        <button class="btn btn-ghost btn-circle avatar">
-          <div class="w-10 rounded-full bg-primary text-primary-content flex items-center justify-center">
-            <!-- <span class="text-lg font-bold">U</span> -->
+        <button class="btn btn-primary btn-circle ">
+          <div class="w-10 rounded-full text-primary-content flex items-center justify-center">
             <UserRound />
           </div>
         </button>

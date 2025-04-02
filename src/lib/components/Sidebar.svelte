@@ -1,7 +1,7 @@
 <script lang="ts">
   // import { Calendar, ChevronLeft, FolderOpen, ListTodo, Moon, Sun, UserRoundSearch, UsersRound } from "lucide-svelte";
-  import { Calendar, ChevronLeft, FolderOpen, ListTodo, Moon, Sun, UserRoundSearch, UsersRound  as IconType, Home, Library, Cog, UsersRound, ChevronRight } from "lucide-svelte";
-  import { sidebarOpen, sidebarMenuPosition } from '$lib/stores/sidebarStore';
+  import { Calendar, ChevronLeft, FolderOpen, ListTodo, Moon, Sun, UserRoundSearch, UsersRound  as IconType, Home, Library, Cog, UsersRound, ChevronRight, PanelRightClose, PanelRightOpen } from "lucide-svelte";
+  import { sidebarOpen, sidebarMenuPosition, sidebarType } from '$lib/stores/sidebarStore';
 	import { afterNavigate } from "$app/navigation";
 	import { menuItems } from "$lib/stores/menuStore";
 
@@ -9,6 +9,7 @@
   // let isSidebarOpen = $state(true); // Local state
   let path = "";
   let currentRoute = $state(); 
+  let floatingSidebar = true; // Set to true for floating sidebar
 
   // Toggle theme and save preference to localStorage
   function toggleTheme() {
@@ -40,9 +41,12 @@
 
 </script>
 <!-- Sidebar -->
+<div class="h-full">
 <aside
-  id="sidebar"
-  class="sidebar fixed hidden md:flex flex-col top-0 left-0 h-full bg-base-200 z-30 transition-[width] duration-200 w-ease-in 
+  id=""
+  class=" fixed hidden md:flex flex-col    
+  bg-base-200 z-30 transition-[width] duration-200 w-ease-in 
+  {$sidebarType ? 'top-0 left-0 h-full' : 'mt-4 mb-4 ml-4 h-[calc(100vh-2rem)] rounded-lg'}
   {$sidebarMenuPosition}
   {$sidebarOpen ? 'w-[14rem]' : 'w-[54px]'}">
 <!-- style="width: {isSidebarOpen ? '16rem' : '54px'}" -->
@@ -57,7 +61,7 @@
       {#if $sidebarOpen}
         <ChevronLeft size="24" />
       {:else}
-        <ChevronRight size="24" />
+        <ChevronRight size="24" />       
       {/if}
     </button>
   </div>
@@ -93,6 +97,7 @@
 
 
 </aside>
+</div>
 
 <style>
   /* TODO: Change color */
