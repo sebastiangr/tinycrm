@@ -17,11 +17,11 @@ model User {
   id            String    @id @unique
   username      String    @unique
   email         String    @unique
-  hashedPassword String
   role          String    @default("user") // admin, user, etc.
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
+  keys          Key[]
 }
 
 model Session {
@@ -29,4 +29,17 @@ model Session {
   userId    String
   expiresAt DateTime
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId]) // Add index for performance
+}
+
+// Add the Key model required by Lucia
+model Key {
+  id              String  @id @unique // e.g., "email:user@example.com", "username:john_doe"
+  userId          String
+  // Hashed password stored here for password strategy
+  hashedPassword  String? // Nullable if using other strategies like OAuth
+  user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId]) // Add index for performance
 }
